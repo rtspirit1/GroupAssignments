@@ -50,6 +50,10 @@ public class ManageVolunteerWorkArea extends javax.swing.JPanel {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -74,7 +78,7 @@ public class ManageVolunteerWorkArea extends javax.swing.JPanel {
         workRequestJTable.setSelectionBackground(new java.awt.Color(56, 90, 174));
         jScrollPane1.setViewportView(workRequestJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 854, 170));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 854, 160));
 
         jButton1.setText("Assign Volunteer");
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, -1, -1));
