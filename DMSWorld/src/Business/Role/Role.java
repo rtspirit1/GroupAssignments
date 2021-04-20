@@ -60,7 +60,7 @@ public abstract class Role {
             Organization organization, 
             Enterprise enterprise, 
             Network network,
-            EcoSystem business);
+            EcoSystem system);
     
 
     @Override

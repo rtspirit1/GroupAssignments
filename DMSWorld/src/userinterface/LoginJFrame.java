@@ -5,7 +5,13 @@
  */
 package userinterface;
 
+import Business.ConfigureASystem;
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
 import Business.PostGreDB.PostGreDB;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.PreparedStatement;
@@ -27,14 +33,25 @@ public class LoginJFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginJFrame
      */
+    private EcoSystem system;
+    private PostGreDB app = PostGreDB.getInstance();
+    UserAccount userAccount;
+    Enterprise inEnterprise;
+    Organization inOrganization;
+    Network network;
+    
+    
     public LoginJFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        system = ConfigureASystem.configure();
+        EcoSystem.setInstance(system);
         
         Border lbl_icons = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(153,153,153));
         lblUsername.setBorder(lbl_icons);
         lblPassword.setBorder(lbl_icons);
+        loginJPanel.setVisible(true);
+        container.setVisible(false);
     }
 
     /**
@@ -47,8 +64,9 @@ public class LoginJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         headerJPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblDMSWorld = new javax.swing.JLabel();
         btnClose = new javax.swing.JButton();
+        lblWelcome = new javax.swing.JLabel();
         container = new javax.swing.JPanel();
         loginJPanel = new javax.swing.JPanel();
         txtUsername = new javax.swing.JTextField();
@@ -60,19 +78,20 @@ public class LoginJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1380, 850));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         headerJPanel.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DMS World");
-        jLabel1.setToolTipText("");
-        jLabel1.setAlignmentY(0.0F);
-        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(255, 255, 255)));
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblDMSWorld.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        lblDMSWorld.setForeground(new java.awt.Color(255, 255, 255));
+        lblDMSWorld.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDMSWorld.setText("DMS World");
+        lblDMSWorld.setToolTipText("");
+        lblDMSWorld.setAlignmentY(0.0F);
+        lblDMSWorld.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(255, 255, 255)));
+        lblDMSWorld.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnClose.setBackground(new java.awt.Color(0, 0, 0));
         btnClose.setForeground(new java.awt.Color(255, 255, 255));
@@ -94,33 +113,43 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         });
 
+        lblWelcome.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        lblWelcome.setForeground(new java.awt.Color(255, 255, 255));
+        lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout headerJPanelLayout = new javax.swing.GroupLayout(headerJPanel);
         headerJPanel.setLayout(headerJPanelLayout);
         headerJPanelLayout.setHorizontalGroup(
             headerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerJPanelLayout.createSequentialGroup()
-                .addContainerGap(489, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(666, 666, 666))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerJPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111)
+                .addComponent(lblDMSWorld, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 557, Short.MAX_VALUE)
                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         headerJPanelLayout.setVerticalGroup(
             headerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerJPanelLayout.createSequentialGroup()
-                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+            .addGroup(headerJPanelLayout.createSequentialGroup()
+                .addGroup(headerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(headerJPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(headerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDMSWorld, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        getContentPane().add(headerJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 160));
+        getContentPane().add(headerJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 100));
 
         container.setPreferredSize(new java.awt.Dimension(1300, 630));
         container.setLayout(new java.awt.CardLayout());
+        getContentPane().add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1370, 690));
 
         loginJPanel.setBackground(new java.awt.Color(255, 255, 255));
+        loginJPanel.setPreferredSize(new java.awt.Dimension(1380, 790));
 
         txtUsername.setForeground(new java.awt.Color(153, 153, 153));
         txtUsername.setText("Username");
@@ -209,7 +238,6 @@ public class LoginJFrame extends javax.swing.JFrame {
         );
         loginJPanelLayout.setVerticalGroup(
             loginJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(loginJPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,12 +251,11 @@ public class LoginJFrame extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 202, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        container.add(loginJPanel, "card2");
-
-        getContentPane().add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1370, 630));
+        getContentPane().add(loginJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1370, 690));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -308,7 +335,7 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         String query = "select * from credentials where username=? and password=?";
         //System.out.println();
-        PostGreDB app = new PostGreDB();
+        
         try {
             st = app.connect().prepareStatement(query);
 
@@ -316,20 +343,76 @@ public class LoginJFrame extends javax.swing.JFrame {
             st.setString(2, password);
             rs = st.executeQuery();
             System.out.println("I am here");
-            if(rs.next()){
-                //SystemAdminWorkAreaJPanel systemAdminJPanel = new SystemAdminWorkAreaJPanel();
-                //systemAdminJPanel.setVisible(true);
-                
-                CardLayout cl = (CardLayout) container.getLayout();
-                cl.next(container);
-                
-
-                this.dispose();
-
-            }else{
-                JOptionPane.showMessageDialog(null, "Invalid Username/Password", "Login Error", 2);
+            UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(username, password);
+        
+            inEnterprise=null;
+            inOrganization=null;
+            network = null;
+        
+        if(userAccount==null){
+            //Step 2: Go inside each network and check each enterprise
+            for(Network net:system.getNetworkList()){
+                //Step 2.a: check against each enterprise
+                for(Enterprise enterprise:net.getEnterpriseDirectory().getEnterpriseList()){
+                    userAccount=enterprise.getUserAccountDirectory().authenticateUser(username, password);
+                    network = net;
+                    if(userAccount==null){
+                       //Step 3:check against each organization for each enterprise
+                       for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
+                           userAccount=organization.getUserAccountDirectory().authenticateUser(username, password);
+                           if(userAccount!=null){
+                               inEnterprise=enterprise;
+                               inOrganization=organization;
+                               network = net;
+                               break;
+                           }
+                       }
+                        
+                    }
+                    else{
+                       inEnterprise=enterprise;
+                       break;
+                    }
+                    if(inOrganization!=null){
+                        break;
+                    }  
+                }
+                if(inEnterprise!=null){
+                    break;
+                }
             }
-        } catch (SQLException ex) {
+        }
+        
+        
+        if(userAccount==null){
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+        else{
+            if(userAccount != null && userAccount.getRole() != null){
+            String welcome = "Welcome";
+            welcome = welcome + " " + userAccount.getUsername();
+            lblWelcome.setText(welcome);
+            CardLayout layout=(CardLayout)container.getLayout();
+            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, network, system));
+            layout.next(container);
+        }
+            
+            
+        }
+        loginJPanel.setVisible(false);
+        headerJPanel.setVisible(true);
+        lblWelcome.setVisible(true);
+        lblDMSWorld.setVisible(false);
+        container.setVisible(true);
+        //leftPanel.setVisible(true);
+        //btnLogoutLabel.setVisible(true);
+        //btnBackLabel.setVisible(false);
+        txtUsername.setText("");
+        txtPassword.setText("");
+        
+        
+        } catch (Exception ex) {
             Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
@@ -389,11 +472,12 @@ public class LoginJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JPanel container;
     private javax.swing.JPanel headerJPanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblDMSWorld;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
+    private javax.swing.JLabel lblWelcome;
     private javax.swing.JPanel loginJPanel;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;

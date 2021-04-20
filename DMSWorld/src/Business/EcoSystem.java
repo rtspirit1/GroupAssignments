@@ -23,6 +23,7 @@ public class EcoSystem extends Organization{
     private static EcoSystem ecosystem;
     private OrganizationDirectory organizationDirectory;
     private ArrayList<Network> networkList;
+    
     public static EcoSystem getInstance(){
         if(ecosystem==null){
             ecosystem=new EcoSystem();
@@ -46,6 +47,7 @@ public class EcoSystem extends Organization{
         
     }
     
+    
     public static void setInstance(EcoSystem system) {
         ecosystem = system;
     }
@@ -58,6 +60,9 @@ public class EcoSystem extends Organization{
         this.networkList = networkList;
     }
     
+    public boolean checkIfUserIsUnique(String userName){
+        return checkIfUserIsUnique(userName, ecosystem);
+    }
    
     public boolean checkIfUserIsUnique(String userName, EcoSystem system){
         if(system==null){
