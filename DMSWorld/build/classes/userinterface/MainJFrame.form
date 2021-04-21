@@ -3,7 +3,10 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+<<<<<<< HEAD
     <Property name="undecorated" type="boolean" value="true"/>
+=======
+>>>>>>> 293570016ec7e09c27100181bc2b963dedf1e1de
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -94,7 +97,11 @@
               <Font name="Cambria" size="36" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+<<<<<<< HEAD
               <Color blue="0" green="0" red="cc" type="rgb"/>
+=======
+              <Color blue="66" green="66" red="66" type="rgb"/>
+>>>>>>> 293570016ec7e09c27100181bc2b963dedf1e1de
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="DMS World"/>

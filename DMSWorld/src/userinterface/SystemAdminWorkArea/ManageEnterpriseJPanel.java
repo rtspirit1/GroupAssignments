@@ -84,6 +84,9 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         enterpriseTypeJComboBox = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         SubmitjButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 

@@ -6,6 +6,10 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
 import Business.Network.Network;
+//import Business.Utils.HeaderColors;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -58,6 +62,8 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        HeaderJPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         NetworkManagementjLabel = new javax.swing.JLabel();
         EnterLocationjLabel = new javax.swing.JLabel();
         LocationTextField = new javax.swing.JTextField();
@@ -71,9 +77,35 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1058, 840));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        HeaderJPanel.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("DMS World");
+
+        javax.swing.GroupLayout HeaderJPanelLayout = new javax.swing.GroupLayout(HeaderJPanel);
+        HeaderJPanel.setLayout(HeaderJPanelLayout);
+        HeaderJPanelLayout.setHorizontalGroup(
+            HeaderJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeaderJPanelLayout.createSequentialGroup()
+                .addGap(435, 435, 435)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(425, Short.MAX_VALUE))
+        );
+        HeaderJPanelLayout.setVerticalGroup(
+            HeaderJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeaderJPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
+        );
+
+        add(HeaderJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 80));
+
         NetworkManagementjLabel.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         NetworkManagementjLabel.setText("Network Management ");
-        add(NetworkManagementjLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 260, -1));
+        add(NetworkManagementjLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 260, -1));
 
         EnterLocationjLabel.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         EnterLocationjLabel.setText("Enter Location :");

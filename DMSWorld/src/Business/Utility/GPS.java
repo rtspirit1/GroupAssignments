@@ -55,7 +55,6 @@ public class GPS {
         System.out.println("%6.3f miles from\n" + distance);
         System.out.println(loc1 + " to " + loc2);
         
-        SendEmailUtility.sendMail("amishagupta1930@gmail.com");
-        
+        SendEmailUtility.sendMail("rahul.tiwarithebest@gmail.com");
     }
 }

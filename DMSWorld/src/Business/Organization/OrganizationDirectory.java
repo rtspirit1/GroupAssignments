@@ -1,6 +1,7 @@
 package Business.Organization;
 
 import Business.Organization.Organization.Type;
+import Business.Organization.Organization;
 import java.util.ArrayList;
 
 /**
