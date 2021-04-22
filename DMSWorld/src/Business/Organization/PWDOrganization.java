@@ -5,10 +5,40 @@
  */
 package Business.Organization;
 
+import Business.Role.PWDAdmin;
+import Business.Role.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author rtspi
  */
-public class PWDOrganization {
+public class PWDOrganization extends Organization{
+    
+    public String pwdName;
+    
+    public PWDOrganization(String name){
+        
+        super(name);
+        this.pwdName = name;
+    }
+
+    public String getPwdName() {
+        return pwdName;
+    }
+
+    public void setPwdName(String pwdName) {
+        this.pwdName = pwdName;
+    }
+    
+    
+
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(new PWDAdmin());
+        return roles ;
+        
+    }
     
 }
