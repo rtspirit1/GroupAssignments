@@ -20,6 +20,10 @@ public abstract class Role {
     
     public enum RoleType{
         SysAdmin("Sysadmin"),
+        EmergencyUnitAdmin("Emergency Unit Admin"),
+        MitigationUnitAdmin("Mitigation Unit Admin"),
+        RecoveryUnitAdmin("Recovery Unit Admin"),
+        ResourceManagementUnitAdmin("Resource Management Unit Admin"),
         DisasterManagementHead("Incharge of Disaster Scene"),
         PoliceAdmin("PoliceDepartmentAdmin"),
         PoliceIncharge("Head of Police Department"),

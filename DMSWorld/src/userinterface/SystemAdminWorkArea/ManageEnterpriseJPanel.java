@@ -103,7 +103,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Enterprise Name", "Type", "Network"
+                "Enterprise Name", "Network Location", "Type"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -117,7 +117,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         enterpriseJTable.setSelectionBackground(new java.awt.Color(56, 90, 174));
         jScrollPane1.setViewportView(enterpriseJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, 523, 120));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 380, 610, 120));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(25, 56, 82));
@@ -158,7 +158,9 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         jLabel6.setText("Enterprise Management ");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 420, -1));
 
+        SubmitjButton.setBackground(new java.awt.Color(0, 0, 0));
         SubmitjButton.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        SubmitjButton.setForeground(new java.awt.Color(255, 255, 255));
         SubmitjButton.setText("Submit");
         SubmitjButton.setToolTipText("Submit");
         SubmitjButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -167,7 +169,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 SubmitjButtonActionPerformed(evt);
             }
         });
-        add(SubmitjButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 550, 90, 40));
+        add(SubmitjButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, 90, 40));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/enterpise management image.png"))); // NOI18N
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1040, 710));

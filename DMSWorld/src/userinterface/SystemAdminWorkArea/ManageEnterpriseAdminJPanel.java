@@ -9,8 +9,12 @@ import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Role.DisasterManagementHead;
+import Business.Role.EmergencyUnitAdmin;
 import Business.Role.FinanceAdmin;
+import Business.Role.MitigationUnitAdmin;
 import Business.Role.PoliceAdmin;
+import Business.Role.RecoveryUnitAdmin;
+import Business.Role.ResourceManagementUnitAdmin;
 import Business.Role.VolunteerAdmin;
 import Business.UserAccount.UserAccount;
 //import Business.Role.EmergencyUnitAdmin;
@@ -189,7 +193,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(enterpriseJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 523, 95));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 380, 620, 120));
 
         SubmitjButton.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         SubmitjButton.setText("Submit");
@@ -238,13 +242,13 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             if (system.checkIfUserIsUnique(username)) {
                 UserAccount account = null;
                 if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.EmergencyResponseUnit) {
-                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new DisasterManagementHead());
+                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new EmergencyUnitAdmin());
                 } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.MitigationUnit) {
-                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new PoliceAdmin());
+                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new MitigationUnitAdmin());
                 } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.RecoveryUnit) {
-                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new VolunteerAdmin());
+                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new RecoveryUnitAdmin());
                 }else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.ResourceManagementUnit) {
-                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new FinanceAdmin());
+                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new ResourceManagementUnitAdmin());
                 }
                 txtUsername.setText("");
                 txtPassword.setText("");

@@ -12,6 +12,13 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.PostGreDB.PostGreDB;
+import Business.Role.DisasterManagementHead;
+import Business.Role.EmergencyUnitAdmin;
+import Business.Role.MitigationUnitAdmin;
+import Business.Role.RecoveryUnitAdmin;
+import Business.Role.ResourceManagementUnitAdmin;
+import static Business.Role.Role.RoleType.EmergencyUnitAdmin;
+import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -40,7 +47,7 @@ public class LoginJFrame extends javax.swing.JFrame {
     UserAccount userAccount;
     Enterprise inEnterprise;
     Organization inOrganization;
-    Network network;
+    Network inNetwork;
     
     
     public LoginJFrame() {
@@ -385,19 +392,19 @@ public class LoginJFrame extends javax.swing.JFrame {
             
            
             System.out.println("I am here");
-            UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(username, password);
+            userAccount=system.getUserAccountDirectory().authenticateUser(username, password);
         
             inEnterprise=null;
             inOrganization=null;
-            network = null;
+            inNetwork = null;
         
         if(userAccount==null){
-            //Step 2: Go inside each network and check each enterprise
+            //Step 2: Go inside each inNetwork and check each enterprise
             for(Network net:system.getNetworkList()){
                 //Step 2.a: check against each enterprise
                 for(Enterprise enterprise:net.getEnterpriseDirectory().getEnterpriseList()){
                     userAccount=enterprise.getUserAccountDirectory().authenticateUser(username, password);
-                    network = net;
+                    inNetwork = net;
                     if(userAccount==null){
                        //Step 3:check against each organization for each enterprise
                        for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
@@ -405,7 +412,7 @@ public class LoginJFrame extends javax.swing.JFrame {
                            if(userAccount!=null){
                                inEnterprise=enterprise;
                                inOrganization=organization;
-                               network = net;
+                               inNetwork = net;
                                break;
                            }
                        }
@@ -433,10 +440,30 @@ public class LoginJFrame extends javax.swing.JFrame {
         else{
             if(userAccount != null && userAccount.getRole() != null){
             String welcome = "Welcome";
-            welcome = welcome + " " + userAccount.getUsername();
+                if(userAccount.getRole() instanceof EmergencyUnitAdmin){
+                    welcome = welcome + " " + userAccount.getUsername();
+                    container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system));
+                }else if(userAccount.getRole() instanceof RecoveryUnitAdmin){
+                    welcome = welcome + " " + userAccount.getUsername();
+                    container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system));
+                }else if(userAccount.getRole() instanceof MitigationUnitAdmin){
+                    welcome = welcome + " " + userAccount.getUsername();
+                    container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system));
+                }else if(userAccount.getRole() instanceof ResourceManagementUnitAdmin){
+                    welcome = welcome + " " + userAccount.getUsername();
+                    container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system));
+                }else if(userAccount.getRole() instanceof DisasterManagementHead){
+                    welcome = welcome + " " + userAccount.getUsername();
+                    container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system));
+                }else if(userAccount.getRole() instanceof SystemAdminRole){
+                    welcome = welcome + " " + userAccount.getUsername();
+                    container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system));
+
+                }
+            
             lblWelcome.setText(welcome);
             CardLayout layout=(CardLayout)container.getLayout();
-            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, network, system));
+            //container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system));
             layout.next(container);
         }
             

@@ -6,11 +6,13 @@
 package userinterface.CreateAccount;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Utility.FormValidations;
 import Business.Utility.SendEmailUtility;
 import Business.WorkQueue.VolunteerRegistrationRequest;
+import Business.WorkQueue.WorkQueue;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -402,6 +404,20 @@ public class VolunteerRegisterationForm extends javax.swing.JPanel {
             SendEmailUtility sendemail = new SendEmailUtility();
             try {
                 sendemail.sendMail(emailJField.getText());
+                for (Network network1 : system.getNetworkList()) {
+                for (Enterprise enterprise : network1.getEnterpriseDirectory().getEnterpriseList()) {
+                    if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.MitigationUnit 
+                            || enterprise.getEnterpriseType() == Enterprise.EnterpriseType.EmergencyResponseUnit
+                            || enterprise.getEnterpriseType() == Enterprise.EnterpriseType.RecoveryUnit
+                            || enterprise.getEnterpriseType() == Enterprise.EnterpriseType.ResourceManagementUnit) {
+                        if (enterprise.getWorkQueue() == null) {
+                            enterprise.setWorkQueue(new WorkQueue());
+                        }
+                        enterprise.getWorkQueue().getWorkRequestList().add(registrationRequest);
+                        
+                    }
+                }
+            }
             } catch (Exception ex) {
                 Logger.getLogger(VolunteerRegisterationForm.class.getName()).log(Level.SEVERE, null, ex);
             }
