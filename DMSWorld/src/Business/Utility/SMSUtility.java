@@ -9,9 +9,9 @@ package Business.Utility;
  *
  * @author rtspi
  */
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
+//import com.twilio.Twilio;
+//import com.twilio.rest.api.v2010.account.Message;
+//import com.twilio.type.PhoneNumber;
 
 public class SMSUtility {
   // Find your Account Sid and Token at twilio.com/user/account
@@ -19,12 +19,12 @@ public class SMSUtility {
   public static final String AUTH_TOKEN = "0400e748563d27179ada415c40daca7d";
 
   public static void main(String[] args) {
-    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-
-    Message message = Message.creator(new PhoneNumber("+16177089658"),
-        new PhoneNumber("+12244780006"), 
-        "Aye BSDK").create();
-
-    System.out.println(message.getSid());
+//    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+//
+//    Message message = Message.creator(new PhoneNumber("+16177089658"),
+//        new PhoneNumber("+12244780006"), 
+//        "Aye BSDK").create();
+//
+//    System.out.println(message.getSid());
   }
 }

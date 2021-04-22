@@ -5,7 +5,9 @@
  */
 package Business.Enterprise;
 
+import Business.Role.FinanceAdmin;
 import Business.Role.Role;
+import Business.Role.VaccineAdmin;
 import java.util.ArrayList;
 
 /**
@@ -14,15 +16,18 @@ import java.util.ArrayList;
  */
 public class ResourceManagementUnit extends Enterprise {
 
-    public ResourceManagementUnit(String name, EnterpriseType type) {
-        super(name, type);
+    public ResourceManagementUnit(String name) {
+        super(name, Enterprise.EnterpriseType.ResourceManagementUnit);
     }
     
 
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        roles = new ArrayList<Role>();
+        roles.add(new VaccineAdmin());
+        roles.add(new FinanceAdmin());
+        return roles;
     }
     
 }

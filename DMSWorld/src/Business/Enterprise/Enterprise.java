@@ -34,7 +34,7 @@ public abstract class Enterprise extends Organization {
 
     public enum EnterpriseType {
         EmergencyResponseUnit("Emergency Response Unit"), MitigationUnit("Mitigation Unit"),
-        RecoveryUnit("RecoverUnit"), ResourceManagementUnit("Resource Management Unit");
+        RecoveryUnit("RecoveryUnit"), ResourceManagementUnit("Resource Management Unit");
         private String value;
 
         private EnterpriseType(String value) {

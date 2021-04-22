@@ -33,6 +33,18 @@ public class EnterpriseDirectory {
             enterprise = new EmergencyResponseUnit(name);
             enterpriseList.add(enterprise);
         }
+        else if (type == Enterprise.EnterpriseType.MitigationUnit){
+            enterprise = new MitigationUnit(name);
+            enterpriseList.add(enterprise);
+        }
+        else if (type == Enterprise.EnterpriseType.RecoveryUnit){
+            enterprise = new RecoveryUnit(name);
+            enterpriseList.add(enterprise);
+        }
+        else if (type == Enterprise.EnterpriseType.ResourceManagementUnit){
+            enterprise = new ResourceManagementUnit(name);
+            enterpriseList.add(enterprise);
+        }
         return enterprise;
     }
 }

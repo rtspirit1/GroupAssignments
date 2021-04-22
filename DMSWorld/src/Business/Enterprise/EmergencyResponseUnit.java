@@ -5,6 +5,8 @@
  */
 package Business.Enterprise;
 
+import Business.Role.FireSafetyAdmin;
+import Business.Role.PoliceAdmin;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -20,9 +22,10 @@ public class EmergencyResponseUnit extends Enterprise{
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-//        roles = new ArrayList<Role>();
-//        roles.add(new ());
-//        roles.add(new PoliceHead());
+        roles = new ArrayList<Role>();
+        roles.add(new FireSafetyAdmin());
+        roles.add(new PoliceAdmin());
+        
         return roles;
     }
     

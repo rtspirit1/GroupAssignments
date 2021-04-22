@@ -9,8 +9,12 @@ import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Role.DisasterManagementHead;
+import Business.Role.EmergencyUnitAdmin;
 import Business.Role.FinanceAdmin;
+import Business.Role.MitigationUnitAdmin;
 import Business.Role.PoliceAdmin;
+import Business.Role.RecoveryUnitAdmin;
+import Business.Role.ResourceManagementUnitAdmin;
 import Business.Role.VolunteerAdmin;
 import Business.UserAccount.UserAccount;
 //import Business.Role.EmergencyUnitAdmin;
@@ -57,6 +61,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                     row[0] = enterprise.getName();
                     row[1] = network.getName();
                     row[2] = userAccount.getUsername();
+                    
 
                     model.addRow(row);
                 }
@@ -169,17 +174,17 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         enterpriseJTable.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Enterprise Name", "Network", "Name", "Username"
+                "Enterprise Name", "Network", "Username"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -237,13 +242,13 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             if (system.checkIfUserIsUnique(username)) {
                 UserAccount account = null;
                 if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.EmergencyResponseUnit) {
-                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new DisasterManagementHead());
+                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new EmergencyUnitAdmin());
                 } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.MitigationUnit) {
-                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new PoliceAdmin());
+                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new MitigationUnitAdmin());
                 } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.RecoveryUnit) {
-                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new VolunteerAdmin());
+                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new RecoveryUnitAdmin());
                 }else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.ResourceManagementUnit) {
-                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new FinanceAdmin());
+                    account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new ResourceManagementUnitAdmin());
                 }
                 txtUsername.setText("");
                 txtPassword.setText("");

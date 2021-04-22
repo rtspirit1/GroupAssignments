@@ -16,17 +16,18 @@ import javax.swing.JPanel;
  *
  * @author rtspi
  */
-public class ContractorAdmin extends Role {
-    
-    public ContractorAdmin(){
-        
-        this.type = Role.RoleType.ContractorAdmin;
+public class RecoveryUnitAdmin extends Role{
+
+    public RecoveryUnitAdmin() {
+        this.type = Role.RoleType.RecoveryUnitAdmin; 
     }
+    
+    
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem business) {
-        this.type = Role.RoleType.ContractorAdmin;
-        return null;
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+            this.type = Role.RoleType.RecoveryUnitAdmin; 
+            return null;
     }
     
 }
