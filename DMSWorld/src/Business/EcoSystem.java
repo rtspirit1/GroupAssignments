@@ -8,6 +8,7 @@ package Business;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
@@ -15,17 +16,19 @@ import java.util.ArrayList;
 
 /**
  *
- * @author MyPC1
+ * @author rtspi
  */
 public class EcoSystem extends Organization{
     
-    private static EcoSystem business;
+    private static EcoSystem ecosystem;
+    private OrganizationDirectory organizationDirectory;
     private ArrayList<Network> networkList;
+    
     public static EcoSystem getInstance(){
-        if(business==null){
-            business=new EcoSystem();
+        if(ecosystem==null){
+            ecosystem=new EcoSystem();
         }
-        return business;
+        return ecosystem;
     }
     public Network createAndAddNetwork(){
         Network network=new Network();
@@ -34,20 +37,19 @@ public class EcoSystem extends Organization{
     }
     @Override
     public ArrayList<Role> getSupportedRole() {
-        ArrayList<Role> roleList=new ArrayList<Role>();
+        ArrayList<Role> roleList=new ArrayList<>();
         roleList.add(new SystemAdminRole());
         return roleList;
     }
     private EcoSystem(){
         super(null);
         networkList=new ArrayList<Network>();
-        /*Network network=new Network();
-        network.setName("Boston");
-        networkList.add(network);*/
+        
     }
     
+    
     public static void setInstance(EcoSystem system) {
-        business = system;
+        ecosystem = system;
     }
 
     public ArrayList<Network> getNetworkList() {
@@ -59,15 +61,14 @@ public class EcoSystem extends Organization{
     }
     
     public boolean checkIfUserIsUnique(String userName){
-        return checkIfUserIsUnique(userName, business);
+        return checkIfUserIsUnique(userName, ecosystem);
     }
-    
-    //business null in above method, so changing it
-    public boolean checkIfUserIsUnique(String userName, EcoSystem ecoSys){
-        if(ecoSys==null){
-            System.out.println("BUSINESS IS NULL");
+   
+    public boolean checkIfUserIsUnique(String userName, EcoSystem system){
+        if(system==null){
+            system = new EcoSystem();
         }
-        for (Network network : ecoSys.getNetworkList()) {
+        for (Network network : system.getNetworkList()) {
             for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
                 for (UserAccount ua : enterprise.getUserAccountDirectory().getUserAccountList()) {
                     if (ua.getUsername().equalsIgnoreCase(userName)) {
@@ -88,7 +89,7 @@ public class EcoSystem extends Organization{
         
     }
     
-    public boolean isUnique(String name){
+    public boolean checkIfNetworkIsUnique(String name){
         for(Network network : networkList){
             if(network.getName().equalsIgnoreCase(name)){
                 return false;

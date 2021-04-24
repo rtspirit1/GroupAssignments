@@ -21,6 +21,8 @@ public abstract class Enterprise extends Organization {
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
     }
+    
+    
 
     public EnterpriseType getEnterpriseType() {
         return enterpriseType;
@@ -31,7 +33,8 @@ public abstract class Enterprise extends Organization {
     }
 
     public enum EnterpriseType {
-        Restaurant("Restaurant");
+        EmergencyResponseUnit("Emergency Response Unit"), MitigationUnit("Mitigation Unit"),
+        RecoveryUnit("RecoveryUnit"), ResourceManagementUnit("Resource Management Unit");
         private String value;
 
         private EnterpriseType(String value) {
@@ -51,6 +54,8 @@ public abstract class Enterprise extends Organization {
             return value;
         }
     }
+    
+    
 
     public Enterprise(String name, EnterpriseType type) {
         super(name);

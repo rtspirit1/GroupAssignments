@@ -6,11 +6,13 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 
 import Business.UserAccount.UserAccount;
 
 import javax.swing.JPanel;
+import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
 
 /**
  *
@@ -30,9 +32,10 @@ public class SystemAdminRole extends Role{
             UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
+            Network network,
             EcoSystem system) {
         this.type = Role.RoleType.SysAdmin;
-        return null; // change this
+        return new SystemAdminWorkAreaJPanel(userProcessContainer, account, system); 
     }
     
 }

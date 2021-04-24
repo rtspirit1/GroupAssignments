@@ -22,12 +22,20 @@ public abstract class Organization {
     private UserAccountDirectory userAccountDirectory;
     private int organizationID;
     private static int counter=0;
+    public ArrayList<Role> roles;
+    private Type type;
     
     public enum Type{
-        RestaurantAdmin("RestaurantAdmin"),
-        Customer("Customer"),
-        DeliveryMan("Delivery"),
-        SysAdmin("Sysadmin");
+        SysAdmin("Sysadmin"),
+        DisasterHead("Disaster Management Head"),
+        PoliceDepartment("Police Organization"),
+        FireDepartment("Fire Safety Organization"),
+        HospitalOrganization("Hospital Organization"),
+        PWDOrganization("Public Works Department"),
+        Contractor("Private Contractor Organization"),
+        Vaccine("Vaccine Organization"),
+        Volunteer("Volunteer Organization"),
+        Management("Risk Management Oganization");
         
         private String value;
         private Type(String value) {
@@ -38,15 +46,27 @@ public abstract class Organization {
         }
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+    
+    
+    
     public Organization(String name) {
         this.name = name;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
         userAccountDirectory = new UserAccountDirectory();
         organizationID = counter;
+        roles = new ArrayList<Role>();
         ++counter;
     }
     public Organization(){
+        
         
     }
     public abstract ArrayList<Role> getSupportedRole();
