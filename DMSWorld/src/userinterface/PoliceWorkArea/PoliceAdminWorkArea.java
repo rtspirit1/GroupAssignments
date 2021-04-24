@@ -5,6 +5,18 @@
  */
 package userinterface.PoliceWorkArea;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.DisasterHeadWorkRequest;
+import Business.WorkQueue.EmergencyResponseUnitRequest;
+import Business.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author kichl
@@ -14,8 +26,47 @@ public class PoliceAdminWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form PoliceAdmin
      */
-    public PoliceAdminWorkArea() {
+    
+    JPanel userProcessContainer;
+    Enterprise enterprise;
+    EcoSystem system;
+    Organization organization;
+    Network network;
+    UserAccount account;
+    
+    public PoliceAdminWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.enterprise = enterprise;
+        this.system = system;
+        this.organization = organization;
+        this.network = network;
+        this.account = account;
+        populateTable();
+    }
+    
+    private void populateTable() {
+
+        DefaultTableModel model = (DefaultTableModel) workRequestTable.getModel();
+        model.setRowCount(0);
+        System.out.println(organization.getWorkQueue().getWorkRequestList());
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList()) {
+            if(wr instanceof EmergencyResponseUnitRequest) {
+                Object[] row = new Object[model.getColumnCount()];
+                row[0] = ((EmergencyResponseUnitRequest) wr);
+                row[1] = ((EmergencyResponseUnitRequest) wr).getSender().getEmployee().getName();
+                row[2] = ((EmergencyResponseUnitRequest) wr).getDisasterType();
+                row[3] = ((EmergencyResponseUnitRequest) wr).getCasualties();
+                row[4] = ((EmergencyResponseUnitRequest) wr).getSenderNetwork();
+                row[5] = ((EmergencyResponseUnitRequest) wr).getMessage();
+                row[6] = ((EmergencyResponseUnitRequest) wr).getStatus();
+//                row[7] = ((DisasterHeadWorkRequest) wr).getSenderOrganization().getName();
+//                row[8] = ((DisasterHeadWorkRequest) wr).getSenderNetwork().getName();
+                row[9] = ((DisasterHeadWorkRequest) wr).getRequestDate();
+                model.addRow(row);
+            }
+            
+        }
     }
 
     /**
@@ -34,13 +85,12 @@ public class PoliceAdminWorkArea extends javax.swing.JPanel {
         processDispatchBtn = new javax.swing.JButton();
         completeDispatchBtn = new javax.swing.JButton();
         rejectdispatchBtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(25, 56, 82));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         jLabel1.setText("POLICE ADMIN WORK AREA");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, -1));
 
@@ -71,10 +121,11 @@ public class PoliceAdminWorkArea extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 1250, 110));
 
-        acceptDispatchBtn.setBackground(new java.awt.Color(255, 255, 255));
-        acceptDispatchBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        acceptDispatchBtn.setForeground(new java.awt.Color(25, 56, 82));
+        acceptDispatchBtn.setBackground(new java.awt.Color(0, 0, 0));
+        acceptDispatchBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        acceptDispatchBtn.setForeground(new java.awt.Color(255, 255, 255));
         acceptDispatchBtn.setText("Accept Dispatch");
+        acceptDispatchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         acceptDispatchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acceptDispatchBtnActionPerformed(evt);
@@ -82,10 +133,11 @@ public class PoliceAdminWorkArea extends javax.swing.JPanel {
         });
         add(acceptDispatchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
 
-        processDispatchBtn.setBackground(new java.awt.Color(255, 255, 255));
-        processDispatchBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        processDispatchBtn.setForeground(new java.awt.Color(25, 56, 82));
+        processDispatchBtn.setBackground(new java.awt.Color(0, 0, 0));
+        processDispatchBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        processDispatchBtn.setForeground(new java.awt.Color(255, 255, 255));
         processDispatchBtn.setText("Process Dispatch");
+        processDispatchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         processDispatchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 processDispatchBtnActionPerformed(evt);
@@ -93,10 +145,11 @@ public class PoliceAdminWorkArea extends javax.swing.JPanel {
         });
         add(processDispatchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
 
-        completeDispatchBtn.setBackground(new java.awt.Color(255, 255, 255));
-        completeDispatchBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        completeDispatchBtn.setForeground(new java.awt.Color(25, 56, 82));
+        completeDispatchBtn.setBackground(new java.awt.Color(0, 0, 0));
+        completeDispatchBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        completeDispatchBtn.setForeground(new java.awt.Color(255, 255, 255));
         completeDispatchBtn.setText("Complete Dispatch");
+        completeDispatchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         completeDispatchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 completeDispatchBtnActionPerformed(evt);
@@ -104,30 +157,74 @@ public class PoliceAdminWorkArea extends javax.swing.JPanel {
         });
         add(completeDispatchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, -1, -1));
 
-        rejectdispatchBtn.setBackground(new java.awt.Color(255, 255, 255));
-        rejectdispatchBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        rejectdispatchBtn.setForeground(new java.awt.Color(25, 56, 82));
+        rejectdispatchBtn.setBackground(new java.awt.Color(0, 0, 0));
+        rejectdispatchBtn.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        rejectdispatchBtn.setForeground(new java.awt.Color(255, 255, 255));
         rejectdispatchBtn.setText("Reject Dispatch");
+        rejectdispatchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rejectdispatchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rejectdispatchBtnActionPerformed(evt);
             }
         });
         add(rejectdispatchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 400, -1, -1));
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/policeadminworkareapanel.png"))); // NOI18N
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, 620, 510));
     }// </editor-fold>//GEN-END:initComponents
 
     private void acceptDispatchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptDispatchBtnActionPerformed
 
-        //emerReq.setStatus("Accepted");
+        int count = workRequestTable.getSelectedRowCount();
+        if(count != 1) {
+            JOptionPane.showMessageDialog(null, "Select a request");
+        }else {
+            int selectedRow = workRequestTable.getSelectedRow();
+            DisasterHeadWorkRequest emerReq = (DisasterHeadWorkRequest) workRequestTable.getValueAt(selectedRow, 0);
+            if(emerReq.getStatus().equals("Rejected")) {
+                JOptionPane.showMessageDialog(null, "Request is already Rejected");
+            }else if(emerReq.getStatus().equals("Accepted")) {
+                JOptionPane.showMessageDialog(null, "Request is already Accepted");
+            }else if(emerReq.getStatus().equals("Processing")) {
+                JOptionPane.showMessageDialog(null, "Request is already Processing");
+            }else if(emerReq.getStatus().equals("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request is already Completed");
+            }else if(emerReq.getStatus().equals("Cancelled")) {
+                JOptionPane.showMessageDialog(null, "Request is already cancelled by sender");
+            }else {
+                String msg = JOptionPane.showInputDialog("Additional Message");
+                emerReq.setStatus("Accepted");
+                emerReq.setMessage(msg);
+                populateTable();
+            }
+      
+        }
         
     }//GEN-LAST:event_acceptDispatchBtnActionPerformed
 
     private void processDispatchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processDispatchBtnActionPerformed
         // TODO add your handling code here:
+        
+        int count = workRequestTable.getSelectedRowCount();
+        if (count != 1) {
+            JOptionPane.showMessageDialog(null, "Select one row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int selectedRow = workRequestTable.getSelectedRow();
+            DisasterHeadWorkRequest emerReq = (DisasterHeadWorkRequest) workRequestTable.getValueAt(selectedRow, 0);
+            if(emerReq.getStatus().equals("Cancelled")) {
+                JOptionPane.showMessageDialog(null, "Request is already cancelled by sender");
+            }else if(emerReq.getStatus().equals("Processing")){
+                JOptionPane.showMessageDialog(null, "Request is already Processing");
+            }else if(emerReq.getStatus().equals("Rejected")){
+                JOptionPane.showMessageDialog(null, "Request is already Rejected");
+            }else if(emerReq.getStatus().equals("Completed")){
+                JOptionPane.showMessageDialog(null, "Request is already Completed");
+            }else if(emerReq.getStatus().equals("Requested")) {
+                JOptionPane.showMessageDialog(null, "Request is not yet Accepted");
+            }else {
+                String msg = JOptionPane.showInputDialog("Additional Message");                
+                emerReq.setStatus("Processing");
+                emerReq.setMessage(msg);
+                populateTable();
+            }            
+        }
 
         
         
@@ -135,10 +232,55 @@ public class PoliceAdminWorkArea extends javax.swing.JPanel {
 
     private void completeDispatchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeDispatchBtnActionPerformed
 
+        int count = workRequestTable.getSelectedRowCount();
+        if(count != 1) {
+            JOptionPane.showMessageDialog(null, "Select a request");
+        }else {
+            int selectedRow = workRequestTable.getSelectedRow();
+            DisasterHeadWorkRequest emerReq = (DisasterHeadWorkRequest) workRequestTable.getValueAt(selectedRow, 0);
+            if(emerReq.getStatus().equals("Rejected")) {
+                JOptionPane.showMessageDialog(null, "Request is already Rejected");
+            }else if(emerReq.getStatus().equals("Accepted")) {
+                JOptionPane.showMessageDialog(null, "Request should be in processing state before marking complete");
+            }else if(emerReq.getStatus().equals("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request is already Completed");
+            }else if(emerReq.getStatus().equals("Cancelled")) {
+                JOptionPane.showMessageDialog(null, "Request is already cancelled by sender");
+            }else if(emerReq.getStatus().equals("Requested")) {
+                JOptionPane.showMessageDialog(null, "Request is not yet Accepted");
+            }else {
+                String msg = JOptionPane.showInputDialog("Additional Message");
+                emerReq.setStatus("Completed");
+                emerReq.setMessage(msg);
+                populateTable();
+            }
+        }
     }//GEN-LAST:event_completeDispatchBtnActionPerformed
 
     private void rejectdispatchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectdispatchBtnActionPerformed
-
+int count = workRequestTable.getSelectedRowCount();
+        if(count != 1) {
+            JOptionPane.showMessageDialog(null, "Select a request");
+        }else {
+            int selectedRow = workRequestTable.getSelectedRow();
+            DisasterHeadWorkRequest emerReq = (DisasterHeadWorkRequest) workRequestTable.getValueAt(selectedRow, 0);
+            if(emerReq.getStatus().equals("Rejected")) {
+                JOptionPane.showMessageDialog(null, "Request is already Rejected");
+            }else if(emerReq.getStatus().equals("Accepted")) {
+                JOptionPane.showMessageDialog(null, "Request is already Accepted");
+            }else if(emerReq.getStatus().equals("Processing")) {
+                JOptionPane.showMessageDialog(null, "Request is already Accepted and Processing");
+            }else if(emerReq.getStatus().equals("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request is already Completed");
+            }else if(emerReq.getStatus().equals("Cancelled")) {
+                JOptionPane.showMessageDialog(null, "Request is already cancelled by sender");
+            }else {
+                String msg = JOptionPane.showInputDialog("Additional Message");
+                emerReq.setStatus("Rejected");
+                emerReq.setMessage(msg);
+                populateTable();
+            }
+        }
         
         
     }//GEN-LAST:event_rejectdispatchBtnActionPerformed
@@ -148,7 +290,6 @@ public class PoliceAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton acceptDispatchBtn;
     private javax.swing.JButton completeDispatchBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton processDispatchBtn;
     private javax.swing.JButton rejectdispatchBtn;

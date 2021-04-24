@@ -11,6 +11,7 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.RecoveryUnitWorkArea.RecoveryUnitAdminJPanel;
 
 /**
  *
@@ -27,7 +28,7 @@ public class RecoveryUnitAdmin extends Role{
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
             this.type = Role.RoleType.RecoveryUnitAdmin; 
-            return null;
+            return new RecoveryUnitAdminJPanel(userProcessContainer, enterprise,system);
     }
     
 }

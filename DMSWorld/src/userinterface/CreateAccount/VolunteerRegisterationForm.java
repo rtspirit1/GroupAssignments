@@ -5,6 +5,7 @@
  */
 package userinterface.CreateAccount;
 
+import Business.DB4OUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
@@ -32,10 +33,11 @@ public class VolunteerRegisterationForm extends javax.swing.JPanel {
     
     private JPanel userProcessContainer;
     private EcoSystem system;
+    private DB4OUtil Db4oUtil = DB4OUtil.getInstance();
     public VolunteerRegisterationForm(JPanel userProcessContainer, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.system = system;
+        this.system = Db4oUtil.retrieveSystem();;
         populateStateComboBox();
         populateOrgComboBox();
     }
@@ -373,7 +375,7 @@ public class VolunteerRegisterationForm extends javax.swing.JPanel {
         validation.setPass1(passwordJfield.getText());
         validation.setEmail(emailJField.getText());
         validation.setContact(PhonejTextField.getText());
-        
+        validation.setAddress(cityJField.getText());
         if(NameJField.getText().isEmpty() 
                 || userNameJfield.getText().isEmpty() 
                 || passwordJfield.getText().isEmpty()
@@ -382,7 +384,7 @@ public class VolunteerRegisterationForm extends javax.swing.JPanel {
                 || cityJField.getText().isEmpty()
                 || network == null
                 || PhonejTextField.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Blank Fields!", "Complete all fiels", 2);
+            JOptionPane.showMessageDialog(null,"Complete all fields", "Blank Fields!", 2);
         }
         if(!validation.isValid()){
             
@@ -414,6 +416,7 @@ public class VolunteerRegisterationForm extends javax.swing.JPanel {
                             enterprise.setWorkQueue(new WorkQueue());
                         }
                         enterprise.getWorkQueue().getWorkRequestList().add(registrationRequest);
+                        
                     }
                 }
             }
@@ -421,8 +424,8 @@ public class VolunteerRegisterationForm extends javax.swing.JPanel {
                 Logger.getLogger(VolunteerRegisterationForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            JOptionPane.showMessageDialog(null, "Success","You have been registered succesfully!",2);
-       
+            JOptionPane.showMessageDialog(null,"You have been registered succesfully!", "Success",2);
+            Db4oUtil.storeSystem(system);
             NameJField.setText("");
             userNameJfield.setText("");
             passwordJfield.setText("");

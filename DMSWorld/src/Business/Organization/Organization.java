@@ -27,6 +27,7 @@ public abstract class Organization {
     
     public enum Type{
         SysAdmin("Sysadmin"),
+        DisasterHead("Disaster Management Head"),
         PoliceDepartment("Police Organization"),
         FireDepartment("Fire Safety Organization"),
         HospitalOrganization("Hospital Organization"),

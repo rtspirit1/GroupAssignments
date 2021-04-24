@@ -5,6 +5,17 @@
  */
 package userinterface.Volunteer;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.OrganizationDirectory;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.UserRegistrationRequest;
+import Business.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author kichl
@@ -14,8 +25,46 @@ public class ManageVolunteerWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form ManageVolunteerWorkArea
      */
-    public ManageVolunteerWorkArea() {
+    private JPanel userProcessContainer;
+    private EcoSystem business;
+    private UserAccount userAccount;
+    private Enterprise enterprise;
+    private Network network;
+    private OrganizationDirectory organizationDirectory;
+    public ManageVolunteerWorkArea(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.userAccount = account;
+        this.enterprise = enterprise;
+        this.network = network;
+        this.business = business;
+        this.organizationDirectory = enterprise.getOrganizationDirectory();
+        populateTable();
+    }
+    
+    public void populateTable() {
+  
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+
+        model.setRowCount(0);
+
+        for (WorkRequest workRequest : enterprise.getWorkQueue().getWorkRequestList()) {
+
+            if (workRequest instanceof UserRegistrationRequest) {
+                Object[] row = new Object[model.getColumnCount()];
+                row[0] = workRequest;
+                row[1] = ((UserRegistrationRequest) workRequest).getStatus();
+                row[2] = ((UserRegistrationRequest) workRequest).getUserName();
+                row[3] = ((UserRegistrationRequest) workRequest).getName();
+                row[4] = ((UserRegistrationRequest) workRequest).getUserEmailId();
+                row[5] = ((UserRegistrationRequest) workRequest).getUserCity();
+                row[6] = ((UserRegistrationRequest) workRequest).getOrgType();
+                row[7] = ((UserRegistrationRequest) workRequest).getNetwork();
+
+                model.addRow(row);
+            }
+        }
+
     }
 
     /**
@@ -30,17 +79,15 @@ public class ManageVolunteerWorkArea extends javax.swing.JPanel {
         VolunteerMangementHeaderjLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnAssign = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1024, 706));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        VolunteerMangementHeaderjLabel.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        VolunteerMangementHeaderjLabel.setForeground(new java.awt.Color(25, 56, 82));
+        VolunteerMangementHeaderjLabel.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         VolunteerMangementHeaderjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        VolunteerMangementHeaderjLabel.setText(" Volunteer Management Work Area");
+        VolunteerMangementHeaderjLabel.setText("DISASTER REQUESTS");
         add(VolunteerMangementHeaderjLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 431, -1));
 
         workRequestJTable.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -80,19 +127,44 @@ public class ManageVolunteerWorkArea extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 854, 160));
 
-        jButton1.setText("Assign Volunteer");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, -1, -1));
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Volunteer/volunteer.jpg"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 850, 420));
+        btnAssign.setBackground(new java.awt.Color(0, 0, 0));
+        btnAssign.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        btnAssign.setForeground(new java.awt.Color(255, 255, 255));
+        btnAssign.setText("Assign Volunteer");
+        btnAssign.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
+        add(btnAssign, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = workRequestJTable.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            WorkRequest request = (WorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
+            if (request.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            } else {
+                request.setReceiver(userAccount);
+                request.setStatus("Pending");
+                populateTable();
+                JOptionPane.showMessageDialog(null, "Request has successfully assigned");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Choose a request to process.");
+            return;
+        }
+    }//GEN-LAST:event_btnAssignActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel VolunteerMangementHeaderjLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnAssign;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables

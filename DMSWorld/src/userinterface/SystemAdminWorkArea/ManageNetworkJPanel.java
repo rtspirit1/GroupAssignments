@@ -102,7 +102,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 {null}
             },
             new String [] {
-                "Site Name"
+                "Location"
             }
         ) {
             Class[] types = new Class [] {
@@ -125,8 +125,11 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 567, 110));
 
-        SubmitJButton.setBackground(new java.awt.Color(204, 204, 204));
+        SubmitJButton.setBackground(new java.awt.Color(0, 0, 0));
+        SubmitJButton.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        SubmitJButton.setForeground(new java.awt.Color(255, 255, 255));
         SubmitJButton.setText("Submit");
+        SubmitJButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SubmitJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SubmitJButtonActionPerformed(evt);

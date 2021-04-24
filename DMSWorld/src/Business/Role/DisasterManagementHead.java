@@ -11,6 +11,8 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.DisasterManagementHead.DisasterManagmentHeadAdminJPanel;
+import userinterface.DisasterManagementHead.ManageDisastersJPanel;
 
 /**
  *
@@ -24,9 +26,9 @@ public class DisasterManagementHead extends Role{
     }
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem business) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         this.type = Role.RoleType.DisasterManagementHead;
-        return null;
+        return new DisasterManagmentHeadAdminJPanel(userProcessContainer,enterprise,system,organization,network, account);
 
     }
     

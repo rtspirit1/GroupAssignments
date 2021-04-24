@@ -11,6 +11,7 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.RMUnitWorkArea.ResourceUnitAdminJPanel;
 
 /**
  *
@@ -28,7 +29,7 @@ public class ResourceManagementUnitAdmin extends Role{
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         this.type = Role.RoleType.ResourceManagementUnitAdmin; 
-        return null;
+        return new ResourceUnitAdminJPanel(userProcessContainer, enterprise,system);
     }
     
 }

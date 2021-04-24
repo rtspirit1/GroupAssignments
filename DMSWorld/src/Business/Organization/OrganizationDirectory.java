@@ -55,6 +55,14 @@ public class OrganizationDirectory {
             organization = new VaccineOrganization(name);
             organizationList.add(organization);
         }
+        else if(type.getValue().equals(Organization.Type.DisasterHead.getValue())){
+            organization = new DisasterManagementOrganization(name);
+            organizationList.add(organization);
+        }
+        else if(type.getValue().equals(Organization.Type.Volunteer.getValue())){
+            organization = new DisasterManagementOrganization(name);
+            organizationList.add(organization);
+        }
         return organization;
     }
     

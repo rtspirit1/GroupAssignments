@@ -19,7 +19,7 @@ public class FormValidations {
  String user = "";  
  String pass1 = "";  
  //String pass2 = "";  
- //String address = "";  
+ String address = "";  
  String contact = "";  
  //String pin = "";  
  String email = "";  
@@ -57,13 +57,13 @@ public class FormValidations {
 //  this.pass2 = pass2;  
 // }  
 //  
-// public String getAddress() {  
-//  return address;  
-// }  
-//  
-// public void setAddress(String address) {  
-//  this.address = address;  
-// }  
+ public String getAddress() {  
+  return address;  
+ }  
+  
+ public void setAddress(String address) {  
+  this.address = address;  
+ }  
   
  public String getContact() {  
   return contact;  
@@ -167,7 +167,10 @@ public class FormValidations {
    errorCodes.put("pass1", ERR_PASS1_LENGTH);
    JOptionPane.showMessageDialog(null, "Password should be atleast 5 characters long.");
   }  
-  
+  if(address.length() == 0){
+          errorCodes.put("address", ERR_ADDRESS_BLANK);
+          JOptionPane.showMessageDialog(null, "City cannot be blank.");
+  }
    
   
 //  if (pin.length() == 0) {  

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import userinterface.DisasterManagementHead.DisasterManagmentHeadAdminJPanel;
 
 /**
  *
@@ -88,11 +89,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         adminJPanel = new javax.swing.JPanel();
         leftSystemPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         btnManageNetwork = new javax.swing.JButton();
         btnManageEnterprises = new javax.swing.JButton();
         btnManageEnterpriseAdmins = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnManageDisasterAdmins = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
@@ -107,21 +107,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         leftSystemPanel.setBackground(new java.awt.Color(0, 0, 0));
         leftSystemPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(102, 102, 102));
-        jButton1.setText("Manage Network");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        leftSystemPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 200, 30));
-
-        btnManageNetwork.setBackground(new java.awt.Color(0, 0, 0));
+        btnManageNetwork.setBackground(new java.awt.Color(255, 255, 255));
         btnManageNetwork.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        btnManageNetwork.setForeground(new java.awt.Color(102, 102, 102));
         btnManageNetwork.setText("Manage Network");
         btnManageNetwork.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnManageNetwork.addActionListener(new java.awt.event.ActionListener() {
@@ -131,9 +118,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         leftSystemPanel.add(btnManageNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 200, 30));
 
-        btnManageEnterprises.setBackground(new java.awt.Color(0, 0, 0));
+        btnManageEnterprises.setBackground(new java.awt.Color(255, 255, 255));
         btnManageEnterprises.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        btnManageEnterprises.setForeground(new java.awt.Color(102, 102, 102));
         btnManageEnterprises.setText("Manage Enterprises");
         btnManageEnterprises.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnManageEnterprises.addActionListener(new java.awt.event.ActionListener() {
@@ -143,9 +129,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         leftSystemPanel.add(btnManageEnterprises, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 200, 30));
 
-        btnManageEnterpriseAdmins.setBackground(new java.awt.Color(0, 0, 0));
+        btnManageEnterpriseAdmins.setBackground(new java.awt.Color(255, 255, 255));
         btnManageEnterpriseAdmins.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        btnManageEnterpriseAdmins.setForeground(new java.awt.Color(102, 102, 102));
         btnManageEnterpriseAdmins.setText("Manage Enterprise Admins");
         btnManageEnterpriseAdmins.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnManageEnterpriseAdmins.addActionListener(new java.awt.event.ActionListener() {
@@ -155,22 +140,20 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         leftSystemPanel.add(btnManageEnterpriseAdmins, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 200, 30));
 
-        jButton5.setBackground(new java.awt.Color(0, 0, 0));
-        jButton5.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(102, 102, 102));
-        jButton5.setText("Manage Network");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnManageDisasterAdmins.setBackground(new java.awt.Color(255, 255, 255));
+        btnManageDisasterAdmins.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        btnManageDisasterAdmins.setText("Manage Disaster Admins");
+        btnManageDisasterAdmins.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnManageDisasterAdmins.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnManageDisasterAdminsActionPerformed(evt);
             }
         });
-        leftSystemPanel.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 200, 30));
+        leftSystemPanel.add(btnManageDisasterAdmins, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 200, 30));
         leftSystemPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 302, 250, -1));
 
-        jTree1.setBackground(new java.awt.Color(0, 0, 0));
         jTree1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jTree1.setForeground(new java.awt.Color(102, 102, 102));
+        jTree1.setForeground(new java.awt.Color(0, 0, 0));
         jTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 jTree1ValueChanged(evt);
@@ -209,10 +192,6 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         add(adminJPanel, java.awt.BorderLayout.LINE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnManageNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageNetworkActionPerformed
         // TODO add your handling code here:
         ManageNetworkJPanel manageNetworkJPanel = new ManageNetworkJPanel(rightSystemPanel, ecosystem);
@@ -238,9 +217,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(rightSystemPanel);
     }//GEN-LAST:event_btnManageEnterpriseAdminsActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnManageDisasterAdminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageDisasterAdminsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        ManageDisasterAdminsJPanel disasterhead = new ManageDisasterAdminsJPanel(userProcessContainer, ecosystem);
+        rightSystemPanel.add("ManageDisasters", disasterhead);
+        CardLayout layout = (CardLayout) rightSystemPanel.getLayout();
+        layout.next(rightSystemPanel);
+    }//GEN-LAST:event_btnManageDisasterAdminsActionPerformed
 
     private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
         // TODO add your handling code here:
@@ -253,11 +236,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminJPanel;
+    private javax.swing.JButton btnManageDisasterAdmins;
     private javax.swing.JButton btnManageEnterpriseAdmins;
     private javax.swing.JButton btnManageEnterprises;
     private javax.swing.JButton btnManageNetwork;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

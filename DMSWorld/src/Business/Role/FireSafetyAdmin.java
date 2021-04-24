@@ -11,6 +11,7 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.FireSafetyWorkArea.FireSafetyAdminWorkAreaJPanel;
 
 /**
  *
@@ -24,8 +25,8 @@ public class FireSafetyAdmin extends Role {
     }
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem business) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         this.type = Role.RoleType.FireAdmin;
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new FireSafetyAdminWorkAreaJPanel(userProcessContainer,account, organization,enterprise, network,system); //To change body of generated methods, choose Tools | Templates.
     }
 }

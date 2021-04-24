@@ -2,6 +2,7 @@ package Business;
 
 
 import Business.Employee.Employee;
+import Business.Role.DisasterManagementHead;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 
@@ -39,6 +40,9 @@ public class ConfigureASystem {
         
         UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
         
+        
+//        Employee employee1 = system.getEmployeeDirectory().createEmployee("DisasterHeadBoston");
+//        UserAccount ua1 = system.getUserAccountDirectory().createUserAccount("abc", "abc", employee1, new SystemAdminRole());
         return system;
     }
     

@@ -193,9 +193,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(enterpriseJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 523, 95));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 380, 620, 120));
 
+        SubmitjButton.setBackground(new java.awt.Color(51, 51, 51));
         SubmitjButton.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        SubmitjButton.setForeground(new java.awt.Color(255, 255, 255));
         SubmitjButton.setText("Submit");
         SubmitjButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SubmitjButton.addActionListener(new java.awt.event.ActionListener() {

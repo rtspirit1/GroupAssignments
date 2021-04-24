@@ -11,6 +11,7 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.PoliceWorkArea.PoliceAdminWorkArea;
 
 /**
  *
@@ -27,8 +28,7 @@ public class PoliceAdmin extends Role {
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem business) {
         this.type = Role.RoleType.PoliceAdmin;
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        return new PoliceAdminWorkArea(userProcessContainer, account, organization, enterprise, network, business);       }
     
     
 }
